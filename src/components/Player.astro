@@ -1,0 +1,88 @@
+---
+const { player, isCurrent, showHands = false } = Astro.props;
+---
+
+<div class={`player ${isCurrent ? 'current' : ''} ${player.folded ? 'folded' : ''}`}>
+  <div class="name">{player.name}</div>
+  <div class="chips">Chips: ${player.chips.toLocaleString()}</div>
+  <div class="bet">Bet: ${player.bet.toLocaleString()}</div>
+  <div class="hand">
+    {player.holeCards?.map((card, i) => (
+      <Card card={card} hidden={!showHands && player.name !== 'You'} key={i} />
+    ))}
+  </div>
+  {player.handRank && (
+    <div class="hand-rank">{player.handRank.type} ({player.handRank.score})</div>
+  )}
+  {player.folded && <div class="status">Folded</div>}
+</div>
+
+<style>
+  .player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: #f8f9fa;
+    margin: 8px;
+    min-width: 120px;
+    transition: all 0.3s;
+  }
+  .player.current {
+    border-color: #007bff;
+    box-shadow: 0 0 20px rgba(0,123,255,0.3);
+    transform: scale(1.05);
+  }
+  .player.folded {
+    opacity: 0.5;
+    border-color: #6c757d;
+  }
+  .name {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+    color: {player.name === 'You' ? '#007bff' : '#333'};
+  }
+  .chips, .bet {
+    font-size: 0.9em;
+    color: #28a745;
+  }
+  .bet {
+    color: #ffc107;
+  }
+  .hand {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hand-rank {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #dc3545;
+    background: rgba(220,53,69,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .status {
+    color: #6c757d;
+    font-style: italic;
+  }
+  @media (max-width: 768px) {
+    .player {
+      min-width: 100px;
+      padding: 8px;
+    }
+    .hand {
+      transform: scale(0.8);
+    }
+  }
+</style>
+
+<script>
+  import Card from '../components/Card.astro';
+</script>
+

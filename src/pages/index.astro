@@ -1,17 +1,20 @@
 ---
-
+import Game from '../components/Game.astro';
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>HOI</title>
-	</head>
-	<body>
-		<h1>Hoi</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Poker Game</title>
+  </head>
+  <body>
+    <Game />
+    <script>
+      console.log('Poker game loaded! Use window.game for debugging.');
+    </script>
+  </body>
 </html>

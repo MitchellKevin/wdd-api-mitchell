@@ -1,0 +1,31 @@
+---
+// src/components/Card.astro
+const { card, hidden = false } = Astro.props;
+---
+
+{hidden ? (
+  <div class="card back"></div>
+) : (
+  <img src={card.image} alt={`${card.value} of ${card.suit}`} class="card" loading="lazy" />
+)}
+<style>
+  .card {
+    width: 60px;
+    height: 84px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 2px solid #333;
+  }
+  .back {
+    background: linear-gradient(135deg, #b6d7f2 0%, #8db9e6 100%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23fff'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23e0e0e0' stroke='%23ccc' stroke-width='2'/%3E%3Ctext x='50' y='55' text-anchor='middle' font-size='12' fill='%23666'%3EH%3C/text%3E%3C/svg%3E");
+    background-size: cover;
+  }
+  @media (min-width: 768px) {
+    .card {
+      width: 80px;
+      height: 112px;
+    }
+  }
+</style>
+
